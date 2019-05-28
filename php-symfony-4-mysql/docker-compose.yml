@@ -1,0 +1,26 @@
+version: '3'
+services:
+    httpd:
+        build:
+            context: ./docker/apache
+        ports:
+            - 9000:9000
+        volumes:
+            - ./:/var/www/html
+            - ./docker/apache/httpd.conf:/etc/apache2/sites-enabled/000-default.conf
+            - ./docker/apache/php.init:/usr/local/etc/php/php.ini
+        depends_on:
+            - mysql
+        environment:
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        command: bash -c "npm install && npm run symfony:prepare && npm run encore:build && echo \"[ NOW STARTING APACHE ]\" && apache2-foreground"
+    mysql:
+        image: mysql:5.7
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
