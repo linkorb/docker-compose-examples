@@ -1,0 +1,15 @@
+{
+    "devDependencies": {
+        "@symfony/webpack-encore": "^0.27.0",
+        "webpack-notifier": "^1.6.0",
+        "node-sass": "^4.11.0",
+        "sass-loader": "^7.1.0"
+    },
+    "scripts": {
+        "encore:dev-server": "encore dev-server",
+        "encore:dev": "encore dev",
+        "encore:watch": "encore dev --watch",
+        "encore:build": "npm rebuild node-sass && encore production --progress",
+        "symfony:prepare": "(php composer.phar install || composer install) && php bin/console doctrine:migrations:migrate"
+    }
+}
