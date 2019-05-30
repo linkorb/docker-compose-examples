@@ -1,8 +1,7 @@
 version: '3'
 services:
     httpd:
-        build:
-            context: ./docker/apache
+        image: harbor.linkorb.com/linkorb/php-apache-nodejs-composer-pdo:7.3.5
         ports:
             - 9000:9000
         volumes:
