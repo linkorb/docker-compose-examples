@@ -6,8 +6,6 @@ services:
             - 9000:9000
         volumes:
             - ./:/var/www/html
-            - ./docker/apache/httpd.conf:/etc/apache2/sites-enabled/000-default.conf
-            - ./docker/apache/php.init:/usr/local/etc/php/php.ini
         depends_on:
             - mysql
         environment:
